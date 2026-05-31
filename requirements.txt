@@ -1,0 +1,10 @@
+streamlit
+cadquery
+cadquery-ocp
+pydantic
+numpy
+multimethod
+ezdxf
+typish
+nptyping
+#streamlit run app.py

@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.env
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# CAD Outputs
+outputs/
+*.stl
+*.step
+*.iges
+*.igs
+
+# Generation History
+history/
+
+# Logs
+*.log
+log.txt
+
+# Test Files
+test_*.py
+
+# HuggingFace Models
+models/qwen2.5-3B-SFT/
+models_llm/
+
+# Python Build Files
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Cache
+.cache/
+
+# Temporary Files
+*.tmp
+*.temp
+
+# Screenshots
+screenshots/
+
+# PyTorch
+*.pt
+*.pth
+
+# Safetensors
+*.safetensors
+
+# Ollama Temporary Exports
+*.gguf
+
+# Coverage
+.coverage
+htmlcov/
+
+# Misc
+tsets/
