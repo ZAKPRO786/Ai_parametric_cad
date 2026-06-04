@@ -210,7 +210,7 @@ Streamlit-based interface for Natural Language to CAD generation and interactive
 ## Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai_parametric_cad.git
+git clone https://github.com/ZAKPRO786/Ai_parametric_cad.git
 cd ai_parametric_cad
 ```
 
