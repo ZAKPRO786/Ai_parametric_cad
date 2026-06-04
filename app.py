@@ -2,6 +2,7 @@ import os
 import json
 
 from datetime import datetime
+from mcp_orchestrator import run
 
 import streamlit as st
 import cadquery as cq
@@ -35,48 +36,36 @@ if st.button("Generate Model"):
 
     try:
 
-        # Gemini -> JSON
-        params = parse_prompt(prompt)
-
+        # Prompt -> JSON
+        #params = parse_prompt(prompt)
+        model, params, report = run(
+            prompt
+        )
         st.subheader(
             "Extracted Parameters"
         )
 
         st.json(params)
 
-        # Custom CAD code display
-        if params["shape"] == "custom":
+        st.write(
+            f"Detected Shape: {params['shape']}"
+        )
+
+        features = params.get(
+            "features",
+            []
+        )
+
+        if features:
 
             st.subheader(
-                "Generated CadQuery Code"
+                "Detected Features"
             )
 
-            st.code(
-                params["cadquery_code"],
-                language="python"
-            )
+            st.json(features)
 
-            st.warning(
-                "Custom CAD generation is experimental."
-            )
-
-            part_name = params.get(
-                "part_name",
-                "custom_part"
-            )
-
-            st.write(
-                f"Detected Part: {part_name}"
-            )
-
-        else:
-
-            st.write(
-                f"Detected Shape: {params['shape']}"
-            )
-
-        # Generate model
-        model = generate_model(params)
+        # Generate CAD model
+        #model = generate_model(params)
 
         # 3D Preview
         st.subheader(
@@ -101,17 +90,7 @@ if st.button("Generate Model"):
             exist_ok=True
         )
 
-        # File naming
-        if params["shape"] == "custom":
-
-            filename = params.get(
-                "part_name",
-                "custom_part"
-            )
-
-        else:
-
-            filename = params["shape"]
+        filename = params["shape"]
 
         stl_path = (
             f"outputs/{filename}.stl"
@@ -133,7 +112,7 @@ if st.button("Generate Model"):
             step_path
         )
 
-        # Save history
+        # Save generation history
         history_file = (
             "history/history.json"
         )
@@ -214,14 +193,20 @@ if st.button("Generate Model"):
                     mime="application/octet-stream"
                 )
 
-
     except Exception as e:
 
         st.error(
-
             f"Generation failed: {str(e)}"
-
         )
 
         if "params" in locals():
+
+            st.subheader(
+                "Last Parsed Parameters"
+            )
+
             st.json(params)
+            st.write(
+                "Solid Count:",
+                report["solid_count"]
+            )
