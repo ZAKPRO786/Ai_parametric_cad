@@ -204,7 +204,112 @@ Solid Count = 1
 Streamlit-based interface for Natural Language to CAD generation and interactive visualization.
 
 ---
+## Project Structure
 
+The project follows a modular architecture that separates AI processing, CAD generation, validation, geometry analysis, and export operations.
+
+```text
+AI_PARAMETRIC_CAD/
+│
+├── app.py                      # Streamlit application entry point
+├── mcp_orchestrator.py         # Multi-agent orchestration layer
+├── requirements.txt
+├── README.md
+│
+├── agents/
+│   ├── planner_agent.py        # Intent analysis and routing
+│   ├── validation_agent.py     # Schema and parameter validation
+│   ├── cad_agent.py            # CAD planning and generation
+│   └── geometry_agent.py       # Geometry verification
+│
+├── parser/
+│   ├── extractor.py            # Parameter extraction
+│   └── rules.py                # Engineering rules
+│
+├── llm/
+│   ├── parser.py               # Qwen integration layer
+│   └── __init__.py
+│
+├── models/
+│   └── schemas.py              # Component schemas
+│
+├── cad/
+│   ├── primitives.py           # Primitive geometry creation
+│   ├── features.py             # Fillets, chamfers, holes, patterns
+│   ├── generator.py            # CAD generation engine
+│   ├── exporter.py             # STEP/STL export utilities
+│   ├── execute.py              # CAD execution pipeline
+│   └── custom_executor.py      # Dynamic CAD execution
+│
+├── utils/
+│   └── viewer.py               # Visualization utilities
+│
+├── assets/
+│   ├── sysarch.png             # System architecture diagram
+│   ├── flow.png                # Data flow diagram
+│   ├── flang.png               # Flange output
+│   ├── wheel.png               # Tyre mould output
+│   ├── cl.png                  # Globe valve output
+│   └── ...
+│
+├── outputs/
+│   ├── *.step                  # Generated STEP files
+│   └── *.stl                   # Generated STL files
+│
+├── history/
+│   └── history.json            # Prompt history
+│
+└── models_llm/
+    └── qwen2.5-3B-SFT/         # Local Qwen model files
+```
+
+### Directory Responsibilities
+
+| Directory | Purpose |
+|------------|----------|
+| agents | Multi-agent workflow for planning, validation, CAD generation, and geometry verification |
+| parser | Extracts engineering parameters from natural language prompts |
+| llm | Handles interaction with the Qwen model |
+| models | Defines structured schemas used throughout the pipeline |
+| cad | Core CAD generation, feature creation, and export operations |
+| utils | Visualization and helper utilities |
+| assets | Architecture diagrams, workflow diagrams, and generated outputs |
+| outputs | Generated STEP and STL files |
+| history | Stores prompt history and generation records |
+| models_llm | Local AI model storage |
+
+---
+
+## Architecture Overview
+
+```text
+User Prompt
+     │
+     ▼
+Streamlit UI
+     │
+     ▼
+MCP Orchestrator
+     │
+ ┌───┼───────────────┐
+ ▼   ▼               ▼
+Planner Validation  CAD Agent
+ Agent    Agent
+     │
+     ▼
+Feature Engine
+     │
+     ▼
+CadQuery + OpenCascade
+     │
+     ▼
+Geometry Agent
+     │
+     ▼
+STEP / STL Export
+```
+
+This modular architecture enables scalable Natural Language to CAD generation while maintaining separation of concerns between AI reasoning, validation, geometry creation, and export workflows.
 # Installation
 
 ## Clone Repository
