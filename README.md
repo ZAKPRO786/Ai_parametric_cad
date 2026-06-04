@@ -244,23 +244,14 @@ AI_PARAMETRIC_CAD/
 ├── utils/
 │   └── viewer.py               # Visualization utilities
 │
-├── assets/
-│   ├── sysarch.png             # System architecture diagram
-│   ├── flow.png                # Data flow diagram
-│   ├── flang.png               # Flange output
-│   ├── wheel.png               # Tyre mould output
-│   ├── cl.png                  # Globe valve output
-│   └── ...
-│
-├── outputs/
-│   ├── *.step                  # Generated STEP files
-│   └── *.stl                   # Generated STL files
-│
-├── history/
-│   └── history.json            # Prompt history
-│
-└── models_llm/
-    └── qwen2.5-3B-SFT/         # Local Qwen model files
+└── assets/
+    ├── sysarch.png             # System architecture diagram
+    ├── flow.png                # Data flow diagram
+    ├── flang.png               # Flange output
+    ├── wheel.png               # Tyre mould output
+    ├── cl.png                  # Globe valve output
+    └── ...
+        # Local Qwen model files
 ```
 
 ### Directory Responsibilities
@@ -274,9 +265,8 @@ AI_PARAMETRIC_CAD/
 | cad | Core CAD generation, feature creation, and export operations |
 | utils | Visualization and helper utilities |
 | assets | Architecture diagrams, workflow diagrams, and generated outputs |
-| outputs | Generated STEP and STL files |
-| history | Stores prompt history and generation records |
-| models_llm | Local AI model storage |
+
+
 
 ---
 
